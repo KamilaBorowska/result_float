@@ -2,6 +2,7 @@
 name = "result_float"
 version = "0.1.0"
 authors = ["Konrad Borowski <konrad@borowski.pw>"]
+description = "Floating point type that cannot store NaN"
 
 [badges]
 gitlab = { repository = "KonradBorowski/result_float" }
