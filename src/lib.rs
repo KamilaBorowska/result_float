@@ -387,6 +387,7 @@ macro_rules! format_impl {
             where
                 F: $imp,
             {
+                #[inline]
                 fn fmt(&self, f: &mut Formatter) -> fmt::Result {
                     self.0.fmt(f)
                 }
