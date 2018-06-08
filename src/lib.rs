@@ -97,6 +97,20 @@ where
         self.0.classify()
     }
 
+    /// Returns the largest integer less than or equal to a number.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(3.99)?;
+    /// let g = rf(3.0)?;
+    ///
+    /// assert_eq!(f.floor(), rf(3.0)?);
+    /// assert_eq!(g.floor(), rf(3.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn floor(self) -> Self {
         rnu(self.0.floor())
