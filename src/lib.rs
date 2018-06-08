@@ -263,6 +263,23 @@ where
         rnu(self.0.abs())
     }
 
+    /// Returns a number that represents the sign of `self`.
+    ///
+    /// - `1.0` if the number is positive, `+0.0` or `INFINITY`
+    /// - `-1.0` if the number is negative, `-0.0` or `NEG_INFINITY`
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let f = rf(3.5)?;
+    ///
+    /// assert_eq!(f.signum(), rf(1.0)?);
+    /// assert_eq!(rf(f64::NEG_INFINITY)?.signum(), rf(-1.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn signum(self) -> Self {
         rnu(self.0.signum())
