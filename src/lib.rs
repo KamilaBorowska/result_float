@@ -3,6 +3,9 @@
 #[macro_use]
 extern crate failure;
 extern crate num_traits;
+#[cfg(test)]
+#[macro_use]
+extern crate quickcheck;
 
 // Fail derive assumes that std is being used
 use core as std;
@@ -385,4 +388,26 @@ where
     F: FloatCore,
 {
     ResultFloat::new(v)
+}
+
+#[cfg(test)]
+mod tests {
+    use quickcheck::TestResult;
+    use rf;
+
+    macro_rules! rf {
+        ($x:expr) => {{
+            let x = $x;
+            if x.is_nan() {
+                return TestResult::discard();
+            }
+            rf(x).unwrap()
+        }};
+    }
+
+    quickcheck! {
+        fn floor(x: f64) -> TestResult {
+            TestResult::from_bool(rf!(x).floor().raw() == x.floor())
+        }
+    }
 }
