@@ -415,6 +415,7 @@ macro_rules! format_impl {
 
 format_impl!(Display LowerExp UpperExp);
 
+#[inline]
 pub fn rf<F>(v: F) -> Result<F>
 where
     F: FloatCore,
