@@ -1,0 +1,17 @@
+[package]
+name = "result_float"
+version = "0.1.0"
+authors = ["Konrad Borowski <konrad@borowski.pw>"]
+
+[dependencies.num-traits]
+version = "0.2.4"
+default-features = false
+
+[dependencies.failure]
+version = "0.1.1"
+default-features = false
+features = ["derive"]
+
+[features]
+default = ["std"]
+std = ["num-traits/std"]
