@@ -232,6 +232,20 @@ where
         rnu(self.0.round())
     }
 
+    /// Returns the integer part of a number.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(3.3)?;
+    /// let g = rf(-3.7)?;
+    ///
+    /// assert_eq!(f.trunc(), rf(3.0)?);
+    /// assert_eq!(g.trunc(), rf(-3.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn trunc(self) -> Self {
         rnu(self.0.trunc())
