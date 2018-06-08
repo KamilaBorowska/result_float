@@ -175,6 +175,20 @@ where
         rnu(self.0.floor())
     }
 
+    /// Returns the smallest integer greater than or equal to a number.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(3.01)?;
+    /// let g = rf(4.0)?;
+    ///
+    /// assert_eq!(f.ceil(), rf(4.0)?);
+    /// assert_eq!(g.ceil(), rf(4.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn ceil(self) -> Self {
         rnu(self.0.floor())
