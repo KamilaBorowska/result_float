@@ -414,6 +414,7 @@ where
     F: FloatCore,
 {
     type Output = ResultFloat<F>;
+    #[inline]
     fn neg(self) -> ResultFloat<F> {
         rnu(-self.0)
     }
