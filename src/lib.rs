@@ -334,6 +334,7 @@ impl ResultFloat<f32> {
         self.0.to_bits()
     }
 
+    #[inline]
     pub fn from_bits(v: u32) -> Result<f32> {
         rf(f32::from_bits(v))
     }
@@ -344,6 +345,7 @@ impl ResultFloat<f64> {
         self.0.to_bits()
     }
 
+    #[inline]
     pub fn from_bits(v: u64) -> Result<f64> {
         rf(f64::from_bits(v))
     }
