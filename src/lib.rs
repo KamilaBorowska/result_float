@@ -237,6 +237,22 @@ where
         rnu(self.0.trunc())
     }
 
+    /// Returns the fractional part of a number.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(3.5)?;
+    /// let y = rf(-3.5)?;
+    /// let abs_difference_x = (x.fract()? - rf(0.5)?)?.abs();
+    /// let abs_difference_y = (y.fract()? - rf(-0.5)?)?.abs();
+    ///
+    /// assert!(abs_difference_x < rf(1e-10)?);
+    /// assert!(abs_difference_y < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn fract(self) -> Result<F> {
         rn(self.0.fract())
