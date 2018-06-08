@@ -272,6 +272,25 @@ where
         rn(self.0.fract())
     }
 
+    /// Computes the absolute value of `self`.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let x = rf(3.5)?;
+    /// let y = rf(-3.5)?;
+    ///
+    /// let abs_difference_x = (x.abs() - x)?.abs();
+    /// let abs_difference_y = (y.abs() - (-y))?.abs();
+    ///
+    /// assert!(abs_difference_x < rf(1e-10)?);
+    /// assert!(abs_difference_y < rf(1e-10)?);
+    ///
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn abs(self) -> Self {
         rnu(self.0.abs())
