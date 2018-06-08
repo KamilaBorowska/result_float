@@ -365,6 +365,7 @@ where
 }
 
 impl ResultFloat<f32> {
+    #[inline]
     pub fn to_bits(self) -> u32 {
         self.0.to_bits()
     }
@@ -375,6 +376,7 @@ impl ResultFloat<f32> {
 }
 
 impl ResultFloat<f64> {
+    #[inline]
     pub fn to_bits(self) -> u64 {
         self.0.to_bits()
     }
