@@ -5,6 +5,8 @@ authors = ["Konrad Borowski <konrad@borowski.pw>"]
 license = "MIT/Apache-2.0"
 description = "Floating point type that cannot store NaN"
 documentation = "https://docs.rs/result_float"
+keywords = ["no_std"]
+categories = ["no-std"]
 
 [badges]
 gitlab = { repository = "KonradBorowski/result_float" }
