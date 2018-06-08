@@ -100,6 +100,23 @@ where
         self.0.is_infinite()
     }
 
+    /// Returns `true` if this number is not infinite.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let f = rf(7.0f64)?;
+    /// let inf = rf(f64::INFINITY)?;
+    /// let neg_inf = rf(f64::NEG_INFINITY)?;
+    ///
+    /// assert!(f.is_finite());
+    /// assert!(!inf.is_finite());
+    /// assert!(!neg_inf.is_finite());
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn is_finite(self) -> bool {
         self.0.is_finite()
