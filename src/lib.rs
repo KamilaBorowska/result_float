@@ -191,7 +191,7 @@ where
     /// ```
     #[inline]
     pub fn ceil(self) -> Self {
-        rnu(self.0.floor())
+        rnu(self.0.ceil())
     }
 
     #[inline]
