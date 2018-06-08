@@ -194,6 +194,21 @@ where
         rnu(self.0.ceil())
     }
 
+    /// Returns the nearest integer to a number. Round half-way cases away from
+    /// `0.0`.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(3.3)?;
+    /// let g = rf(-3.3)?;
+    ///
+    /// assert_eq!(f.round(), rf(3.0)?);
+    /// assert_eq!(g.round(), rf(-3.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn round(self) -> Self {
         rnu(self.0.round())
