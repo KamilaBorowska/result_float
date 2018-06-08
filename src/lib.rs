@@ -151,6 +151,24 @@ where
         self.0.is_normal()
     }
 
+    /// Returns the floating point category of the number. If only one property
+    /// is going to be tested, it is generally faster to use the specific
+    /// predicate instead.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::num::FpCategory;
+    /// use std::f64;
+    ///
+    /// let num = rf(12.4)?;
+    /// let inf = rf(f64::INFINITY)?;
+    ///
+    /// assert_eq!(num.classify(), FpCategory::Normal);
+    /// assert_eq!(inf.classify(), FpCategory::Infinite);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn classify(self) -> FpCategory {
         self.0.classify()
