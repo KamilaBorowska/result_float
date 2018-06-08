@@ -77,6 +77,24 @@ where
         self.0
     }
 
+    /// Returns `true` if this value is positive infinity or negative infinity and
+    /// false otherwise.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let f = rf(7.0)?;
+    /// let inf = rf(f64::INFINITY)?;
+    /// let neg_inf = rf(f64::NEG_INFINITY)?;
+    ///
+    /// assert!(!f.is_infinite());
+    /// assert!(inf.is_infinite());
+    /// assert!(neg_inf.is_infinite());
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn is_infinite(self) -> bool {
         self.0.is_infinite()
