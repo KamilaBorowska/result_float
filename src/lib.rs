@@ -87,6 +87,30 @@ where
         self.0.is_finite()
     }
 
+    /// Returns `true` if the number is neither zero, infinite,
+    /// or [subnormal][subnormal].
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let min = rf(f64::MIN_POSITIVE)?; // 2.2250738585072014e-308f64
+    /// let max = rf(f64::MAX)?;
+    /// let lower_than_min = rf(1.0e-308_f64)?;
+    /// let zero = rf(0.0f64)?;
+    ///
+    /// assert!(min.is_normal());
+    /// assert!(max.is_normal());
+    ///
+    /// assert!(!zero.is_normal());
+    /// assert!(!rf(f64::INFINITY)?.is_normal());
+    /// // Values between `0` and `min` are Subnormal.
+    /// assert!(!lower_than_min.is_normal());
+    /// # Ok(())
+    /// # }
+    /// ```
+    /// [subnormal]: https://en.wikipedia.org/wiki/Denormal_number
     #[inline]
     pub fn is_normal(self) -> bool {
         self.0.is_normal()
