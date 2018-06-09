@@ -495,6 +495,22 @@ where
         rn(self.0.acosh())
     }
 
+    /// Inverse hyperbolic tangent function.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let e = rf(f64::consts::E)?;
+    /// let f = e.tanh().atanh()?;
+    ///
+    /// let abs_difference = (f - e)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1.0e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn atanh(self) -> Result<F> {
         rn(self.0.atanh())
