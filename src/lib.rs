@@ -602,5 +602,10 @@ mod tests {
         fn floor(x: f64) -> TestResult {
             TestResult::from_bool(rf!(x).floor().raw() == x.floor())
         }
+
+        fn acosh(x: f64) -> TestResult {
+            let x = rf!(x).abs();
+            TestResult::from_bool((x.cosh().acosh().unwrap() - x).unwrap() < rf(1e-10).unwrap())
+        }
     }
 }
