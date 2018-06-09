@@ -490,6 +490,21 @@ where
         rnu(self.0.asinh())
     }
 
+    /// Inverse hyperbolic cosine function.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(1.0)?;
+    /// let f = x.cosh().acosh()?;
+    ///
+    /// let abs_difference = (f - x)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1.0e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn acosh(self) -> Result<F> {
         rn(self.0.acosh())
