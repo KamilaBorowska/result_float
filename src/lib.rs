@@ -45,6 +45,7 @@ pub type Result<F> = core::result::Result<ResultFloat<F>, NaN>;
 
 /// A floating point number behaving like `f32` that does not allow NaN.
 pub type Rf32 = ResultFloat<f32>;
+/// A floating point number behaving like `f64` that does not allow NaN.
 pub type Rf64 = ResultFloat<f64>;
 
 fn rn<F>(f: F) -> Result<F>
