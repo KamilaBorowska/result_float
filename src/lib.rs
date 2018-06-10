@@ -12,6 +12,7 @@ use core as std;
 
 use core::cmp::Ordering;
 use core::fmt::{self, Display, Formatter, LowerExp, UpperExp};
+use core::hash::{Hash, Hasher};
 use core::num::FpCategory;
 use core::ops::{Add, Div, Mul, Neg, Rem, Sub};
 use num_traits::float::FloatCore;
@@ -606,6 +607,24 @@ macro_rules! format_impl {
 
 format_impl!(Display LowerExp UpperExp);
 
+impl Hash for ResultFloat<f32> {
+    fn hash<H>(&self, state: &mut H)
+    where
+        H: Hasher,
+    {
+        state.write_u32(if self.0 == 0.0 { 0 } else { self.0.to_bits() })
+    }
+}
+
+impl Hash for ResultFloat<f64> {
+    fn hash<H>(&self, state: &mut H)
+    where
+        H: Hasher,
+    {
+        state.write_u64(if self.0 == 0.0 { 0 } else { self.0.to_bits() })
+    }
+}
+
 #[inline]
 pub fn rf<F>(v: F) -> Result<F>
 where
@@ -616,8 +635,53 @@ where
 
 #[cfg(test)]
 mod tests {
+    use core::hash::{Hash, Hasher};
     use quickcheck::TestResult;
     use rf;
+
+    struct TestHasher {
+        value: u64,
+        shift: u8,
+    }
+
+    impl Hasher for TestHasher {
+        fn finish(&self) -> u64 {
+            self.value
+        }
+
+        fn write(&mut self, bytes: &[u8]) {
+            for &b in bytes {
+                self.value += u64::from(b) << self.shift;
+                self.shift += 8;
+            }
+        }
+    }
+
+    fn hash(v: impl Hash) -> u64 {
+        let mut hasher = TestHasher { value: 0, shift: 0 };
+        v.hash(&mut hasher);
+        hasher.finish()
+    }
+
+    #[test]
+    fn test_positive_zero_f32() {
+        assert_eq!(hash(rf(0.0f32).unwrap()), 0);
+    }
+
+    #[test]
+    fn test_negative_zero_f32() {
+        assert_eq!(hash(rf(-0.0f32).unwrap()), 0);
+    }
+
+    #[test]
+    fn test_positive_zero_f64() {
+        assert_eq!(hash(rf(0.0).unwrap()), 0);
+    }
+
+    #[test]
+    fn test_negative_zero_f64() {
+        assert_eq!(hash(rf(-0.0).unwrap()), 0);
+    }
 
     macro_rules! rf {
         ($x:expr) => {{
@@ -637,6 +701,24 @@ mod tests {
         fn acosh(x: f64) -> TestResult {
             let x = rf!(x).abs();
             TestResult::from_bool((x.cosh().acosh().unwrap() - x).unwrap() < rf(1e-10).unwrap())
+        }
+
+        fn hash_f32(x: f32) -> TestResult {
+            let x = rf!(x);
+            if x == rf!(0.0f32) && x.is_sign_negative() {
+                TestResult::discard()
+            } else {
+                TestResult::from_bool(hash(x) == x.to_bits().into())
+            }
+        }
+
+        fn hash_f64(x: f64) -> TestResult {
+            let x = rf!(x);
+            if x == rf!(0.0f64) && x.is_sign_negative() {
+                TestResult::discard()
+            } else {
+                TestResult::from_bool(hash(x) == x.to_bits())
+            }
         }
     }
 }
