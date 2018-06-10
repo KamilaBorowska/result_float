@@ -350,6 +350,20 @@ where
         rnu(self.0.signum())
     }
 
+    /// Returns `true` if and only if `self` has a positive sign, including `+0.0`
+    /// and positive infinity.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// let f = rf(7.0)?;
+    /// let g = rf(-7.0)?;
+    ///
+    /// assert!(f.is_sign_positive());
+    /// assert!(!g.is_sign_positive());
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn is_sign_positive(self) -> bool {
         self.0.is_sign_positive()
