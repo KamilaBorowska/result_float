@@ -87,6 +87,16 @@ where
         }
     }
 
+    /// Returns the underlying float value.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// assert_eq!(rf(3.14)?.raw(), 3.14);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn raw(self) -> F {
         self.0
