@@ -348,6 +348,21 @@ where
         self.0.is_sign_positive()
     }
 
+    /// Returns `true` if and only if `self` has a negative sign, including `-0.0`
+    /// and negative infinity.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(7.0)?;
+    /// let g = rf(-7.0)?;
+    ///
+    /// assert!(!f.is_sign_negative());
+    /// assert!(g.is_sign_negative());
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn is_sign_negative(self) -> bool {
         self.0.is_sign_negative()
