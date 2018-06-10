@@ -23,6 +23,13 @@ use num_traits::Float;
 #[fail(display = "NaN")]
 pub struct NaN;
 
+/// A floating point number that cannot store NaN.
+///
+/// Usually there is no need to access this struct directly, and instead
+/// one of aliases like [`Rf32`] or [`Rf64`] could be used instead.
+///
+/// [Rf32]: ./type.Rf32.html
+/// [Rf64]: ./type.Rf64.html
 #[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
 pub struct ResultFloat<F>(F);
 
