@@ -635,23 +635,22 @@ macro_rules! format_impl {
 
 format_impl!(Display LowerExp UpperExp);
 
-impl Hash for ResultFloat<f32> {
-    fn hash<H>(&self, state: &mut H)
-    where
-        H: Hasher,
-    {
-        state.write_u32(if self.0 == 0.0 { 0 } else { self.0.to_bits() })
-    }
+macro_rules! hash {
+    ($($t:ident $method:ident)*) => {
+        $(
+            impl Hash for ResultFloat<$t> {
+                fn hash<H>(&self, state: &mut H)
+                where
+                    H: Hasher,
+                {
+                    state.$method(if self.0 == 0.0 { 0 } else { self.0.to_bits() })
+                }
+            }
+        )*
+    };
 }
 
-impl Hash for ResultFloat<f64> {
-    fn hash<H>(&self, state: &mut H)
-    where
-        H: Hasher,
-    {
-        state.write_u64(if self.0 == 0.0 { 0 } else { self.0.to_bits() })
-    }
-}
+hash!(f32 write_u32 f64 write_u64);
 
 /// Shorthand for `ResultFloat::new(value)`.
 ///
