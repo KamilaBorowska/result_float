@@ -674,7 +674,7 @@ macro_rules! hash {
 
 hash!(f32 write_u32 f64 write_u64);
 
-/// Shorthand for `ResultFloat::new(value)`.
+/// Shorthand for [`ResultFloat::new(value)`].
 ///
 /// ```
 /// # fn main() -> Result<(), result_float::NaN> {
@@ -683,6 +683,8 @@ hash!(f32 write_u32 f64 write_u64);
 /// # Ok(())
 /// # }
 /// ```
+///
+/// [`ResultFloat::new(value)`]: ./struct.ResultFloat.html#method.new
 #[inline]
 pub fn rf<F>(v: F) -> Result<F>
 where
