@@ -570,25 +570,29 @@ impl ResultFloat<f64> {
 }
 
 macro_rules! op_impl {
-    ($imp:ident $method:ident $op:tt) => {
-        impl<F> $imp for ResultFloat<F>
-        where
-            F: FloatCore
-        {
-            type Output = Result<F>;
-            #[inline]
-            fn $method(self, other: Self) -> Result<F> {
-                rn(self.0 $op other.0)
+    ($( $imp:ident $method:ident $op:tt ) *) => {
+        $(
+            impl<F> $imp for ResultFloat<F>
+            where
+                F: FloatCore
+            {
+                type Output = Result<F>;
+                #[inline]
+                fn $method(self, other: Self) -> Result<F> {
+                    rn(self.0 $op other.0)
+                }
             }
-        }
+        )*
     };
 }
 
-op_impl!(Add add +);
-op_impl!(Sub sub -);
-op_impl!(Mul mul *);
-op_impl!(Div div /);
-op_impl!(Rem rem %);
+op_impl!(
+    Add add +
+    Sub sub -
+    Mul mul *
+    Div div /
+    Rem rem %
+);
 
 impl<F> Neg for ResultFloat<F>
 where
