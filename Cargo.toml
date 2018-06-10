@@ -11,6 +11,7 @@ categories = ["no-std"]
 
 [badges]
 gitlab = { repository = "KonradBorowski/result_float" }
+maintenance = { status = "actively-developed" }
 
 [dependencies.num-traits]
 version = "0.2.4"
