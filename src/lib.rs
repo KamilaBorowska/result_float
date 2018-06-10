@@ -625,6 +625,15 @@ impl Hash for ResultFloat<f64> {
     }
 }
 
+/// Shorthand for `ResultFloat::new(value)`.
+///
+/// ```
+/// # fn main() -> Result<(), result_float::NaN> {
+/// use result_float::rf;
+/// assert_eq!((rf(0.5)? * rf(2.0)?)?, rf(1.0)?);
+/// # Ok(())
+/// # }
+/// ```
 #[inline]
 pub fn rf<F>(v: F) -> Result<F>
 where
