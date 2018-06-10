@@ -64,6 +64,18 @@ impl<F> ResultFloat<F>
 where
     F: FloatCore,
 {
+    /// Constructs a `ResultFloat` with the given value.
+    ///
+    /// Returns `Err` if the value is `NaN`.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::{rf, ResultFloat};
+    ///
+    /// assert_eq!(ResultFloat::new(1.0)?, rf(1.0)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn new(v: F) -> Result<F> {
         if v.is_nan() {
