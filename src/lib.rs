@@ -19,6 +19,13 @@ use num_traits::float::FloatCore;
 #[cfg(feature = "std")]
 use num_traits::Float;
 
+/// An error which is returned when an operation returns NaN.
+///
+/// ```
+/// use std::f64::NAN;
+/// use result_float::{rf, NaN};
+/// assert_eq!(rf(NAN), Err(NaN));
+/// ```
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Fail)]
 #[fail(display = "NaN")]
 pub struct NaN;
