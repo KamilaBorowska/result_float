@@ -51,6 +51,9 @@ where
     }
 }
 
+/// The type returned by most [`ResultFloat`] operations.
+///
+/// [ResultFloat]: struct.ResultFloat.html
 pub type Result<F> = core::result::Result<ResultFloat<F>, NaN>;
 
 /// A floating point number behaving like `f32` that does not allow NaN.
