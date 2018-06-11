@@ -33,11 +33,7 @@ pub struct NaN;
 #[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
 pub struct ResultFloat<F>(F);
 
-impl<F> Eq for ResultFloat<F>
-where
-    F: PartialEq,
-{
-}
+impl<F> Eq for ResultFloat<F> where F: PartialEq {}
 
 impl<F> Ord for ResultFloat<F>
 where
