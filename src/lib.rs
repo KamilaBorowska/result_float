@@ -19,7 +19,7 @@ use num_traits::float::FloatCore;
 #[cfg(feature = "std")]
 use num_traits::Float;
 
-#[derive(Copy, Clone, Debug, Fail)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Fail)]
 #[fail(display = "NaN")]
 pub struct NaN;
 
