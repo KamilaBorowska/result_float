@@ -415,6 +415,22 @@ where
         rnu(self.0.recip())
     }
 
+    /// Raises a number to an integer power.
+    ///
+    /// Using this function is generally faster than using `powf`. Additionally,
+    /// this function cannot return an error value.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(2.0)?;
+    /// let abs_difference = (x.powi(2) - (x*x)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn powi(self, n: i32) -> Self {
         rnu(self.0.powi(n))
