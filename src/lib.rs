@@ -1,7 +1,8 @@
 #![no_std]
 
-#[macro_use]
 extern crate failure;
+#[macro_use]
+extern crate failure_derive;
 extern crate num_traits;
 #[cfg(test)]
 #[macro_use]
