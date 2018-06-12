@@ -20,9 +20,10 @@ pages:
   stage: deploy
   script:
   - cargo doc
+  - mv target/doc public
   artifacts:
     paths:
-    - target/doc
+    - public
   image: liuchong/rustup:nightly
   only:
   - master
