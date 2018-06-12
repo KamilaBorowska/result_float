@@ -395,6 +395,19 @@ where
         self.0.is_sign_negative()
     }
 
+    /// Takes the reciprocal (inverse) of a number, `1/x`.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(2.0)?;
+    /// let abs_difference = (x.recip() - (rf(1.0)?/x)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn recip(self) -> Self {
         rnu(self.0.recip())
