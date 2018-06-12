@@ -15,3 +15,14 @@ test:beta:
 test:nightly:
   script: *test_script
   image: liuchong/rustup:nightly
+
+pages:
+  stage: deploy
+  script:
+  - cargo doc
+  artifacts:
+    paths:
+    - target/doc
+  image: liuchong/rustup:nightly
+  only:
+  - master
