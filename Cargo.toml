@@ -13,6 +13,9 @@ categories = ["no-std"]
 gitlab = { repository = "KonradBorowski/result_float" }
 maintenance = { status = "actively-developed" }
 
+[dependencies]
+failure_derive = "0.1.1"
+
 [dependencies.num-traits]
 version = "0.2.4"
 default-features = false
@@ -20,7 +23,6 @@ default-features = false
 [dependencies.failure]
 version = "0.1.1"
 default-features = false
-features = ["derive"]
 
 [dev-dependencies]
 quickcheck = "0.6.2"
