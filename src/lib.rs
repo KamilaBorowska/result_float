@@ -8,7 +8,8 @@ extern crate num_traits;
 #[macro_use]
 extern crate quickcheck;
 
-// Fail derive assumes that std is being used
+// failure_derive may be used with std feature, causing issues
+#[allow(unused_imports)]
 use core as std;
 
 use core::cmp::Ordering;
