@@ -1,3 +1,17 @@
+//! Contains floating point types that return an error when set to `NaN`.
+//!
+//! # Examples
+//!
+//! ```
+//! extern crate result_float;
+//!
+//! use result_float::{rf, NaN};
+//!
+//! fn main() -> Result<(), NaN> {
+//!     assert_eq!((rf(2.5)? + rf(1.5)?)?, rf(4.0)?);
+//!     Ok(())
+//! }
+//! ```
 #![no_std]
 
 extern crate failure;
