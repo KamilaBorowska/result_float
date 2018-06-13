@@ -757,7 +757,7 @@ where
 mod tests {
     use core::hash::{Hash, Hasher};
     use quickcheck::TestResult;
-    use rf;
+    use {rf, Rf64};
 
     struct TestHasher {
         value: u64,
@@ -840,5 +840,10 @@ mod tests {
                 TestResult::from_bool(hash(x) == x.to_bits())
             }
         }
+    }
+
+    #[test]
+    fn test_default() {
+        assert_eq!(Rf64::default(), rf(0.0).unwrap());
     }
 }
