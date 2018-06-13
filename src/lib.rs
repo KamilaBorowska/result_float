@@ -1,17 +1,3 @@
-//! Contains floating point types that return an error when set to `NaN`.
-//!
-//! # Examples
-//!
-//! ```
-//! extern crate result_float;
-//!
-//! use result_float::{rf, NaN};
-//!
-//! fn main() -> Result<(), NaN> {
-//!     assert_eq!((rf(2.5)? + rf(1.5)?)?, rf(4.0)?);
-//!     Ok(())
-//! }
-//! ```
 #![no_std]
 
 extern crate failure;
@@ -745,6 +731,15 @@ macro_rules! hash {
 
 hash!(f32 write_u32 f64 write_u64);
 
+impl<F> Default for ResultFloat<F>
+where
+    F: Default + FloatCore,
+{
+    fn default() -> ResultFloat<F> {
+        rf(F::default()).unwrap()
+    }
+}
+
 #[cfg(feature = "serde")]
 /// Requires crate feature `serde`
 impl<F> Serialize for ResultFloat<F>
@@ -796,7 +791,7 @@ where
 mod tests {
     use core::hash::{Hash, Hasher};
     use quickcheck::TestResult;
-    use rf;
+    use {rf, Rf64};
 
     struct TestHasher {
         value: u64,
@@ -879,6 +874,11 @@ mod tests {
                 TestResult::from_bool(hash(x) == x.to_bits())
             }
         }
+    }
+
+    #[test]
+    fn test_default() {
+        assert_eq!(Rf64::default(), rf(0.0).unwrap());
     }
 
     #[cfg(feature = "serde")]
