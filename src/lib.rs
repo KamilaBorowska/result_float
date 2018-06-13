@@ -732,6 +732,7 @@ macro_rules! hash {
 hash!(f32 write_u32 f64 write_u64);
 
 #[cfg(feature = "serde")]
+/// Requires crate feature `serde`
 impl<F> Serialize for ResultFloat<F>
 where
     F: Serialize,
@@ -745,6 +746,7 @@ where
 }
 
 #[cfg(feature = "serde")]
+/// Requires crate feature `serde`
 impl<'de, F> Deserialize<'de> for ResultFloat<F>
 where
     F: Deserialize<'de> + FloatCore,
