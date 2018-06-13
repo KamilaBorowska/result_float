@@ -19,7 +19,7 @@ test:nightly:
 pages:
   stage: deploy
   script:
-  - cargo doc
+  - cargo doc --all-features
   - mv target/doc public
   - |
     echo "
