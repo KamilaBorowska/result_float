@@ -4,6 +4,8 @@ extern crate failure;
 #[macro_use]
 extern crate failure_derive;
 extern crate num_traits;
+#[cfg(feature = "serde")]
+extern crate serde;
 #[cfg(test)]
 #[macro_use]
 extern crate quickcheck;
@@ -20,6 +22,10 @@ use core::ops::{Add, Div, Mul, Neg, Rem, Sub};
 use num_traits::float::FloatCore;
 #[cfg(feature = "std")]
 use num_traits::Float;
+#[cfg(feature = "serde")]
+use serde::de::{Deserialize, Deserializer, Error};
+#[cfg(feature = "serde")]
+use serde::ser::{Serialize, Serializer};
 
 /// An error which is returned when an operation returns NaN.
 ///
@@ -725,6 +731,32 @@ macro_rules! hash {
 
 hash!(f32 write_u32 f64 write_u64);
 
+#[cfg(feature = "serde")]
+impl<F> Serialize for ResultFloat<F>
+where
+    F: Serialize,
+{
+    fn serialize<S>(&self, serializer: S) -> core::result::Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        self.0.serialize(serializer)
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<'de, F> Deserialize<'de> for ResultFloat<F>
+where
+    F: Deserialize<'de> + FloatCore,
+{
+    fn deserialize<D>(deserializer: D) -> core::result::Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        rf(F::deserialize(deserializer)?).map_err(D::Error::custom)
+    }
+}
+
 /// Shorthand for [`ResultFloat::new(value)`].
 ///
 /// ```
@@ -831,5 +863,12 @@ mod tests {
                 TestResult::from_bool(hash(x) == x.to_bits())
             }
         }
+    }
+
+    #[cfg(feature = "serde")]
+    #[test]
+    fn test_ser_de() {
+        extern crate serde_test;
+        serde_test::assert_tokens(&rf(3.14).unwrap(), &[serde_test::Token::F64(3.14)]);
     }
 }

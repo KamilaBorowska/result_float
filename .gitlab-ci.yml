@@ -1,7 +1,7 @@
 test:1.26:
   script: &test_script
   - rustc --version && cargo --version
-  - cargo test --all --verbose
+  - cargo test --all --all-features --verbose
   image: liuchong/rustup:1.26.0
 
 test:stable:

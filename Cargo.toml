@@ -25,7 +25,13 @@ default-features = false
 version = "0.1.1"
 default-features = false
 
+[dependencies.serde]
+version = "1.0.66"
+default-features = false
+optional = true
+
 [dev-dependencies]
+serde_test = "1.0.66"
 quickcheck = "0.6.2"
 
 [features]
