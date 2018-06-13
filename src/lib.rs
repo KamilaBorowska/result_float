@@ -725,6 +725,15 @@ macro_rules! hash {
 
 hash!(f32 write_u32 f64 write_u64);
 
+impl<F> Default for ResultFloat<F>
+where
+    F: Default + FloatCore,
+{
+    fn default() -> ResultFloat<F> {
+        rf(F::default()).unwrap()
+    }
+}
+
 /// Shorthand for [`ResultFloat::new(value)`].
 ///
 /// ```
