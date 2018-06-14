@@ -23,6 +23,13 @@ clippy:
   - cargo clippy --all --all-features --verbose
   image: liuchong/rustup:nightly
 
+rustfmt:
+  script:
+  - rustc --version && cargo --version
+  - rustup component add rustfmt-preview
+  - cargo fmt -- --check
+  image: liuchong/rustup:nightly
+
 pages:
   stage: deploy
   script:
