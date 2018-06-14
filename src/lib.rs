@@ -69,18 +69,11 @@ pub type Rf32 = ResultFloat<f32>;
 /// A floating point number behaving like `f64` that does not allow NaN.
 pub type Rf64 = ResultFloat<f64>;
 
-fn rn<F>(f: F) -> Result<F>
-where
-    F: FloatCore,
-{
-    ResultFloat::new(f)
-}
-
 fn rnu<F>(f: F) -> ResultFloat<F>
 where
     F: FloatCore,
 {
-    rn(f).unwrap()
+    rf(f).unwrap()
 }
 
 impl<F> ResultFloat<F>
@@ -315,7 +308,7 @@ where
     /// ```
     #[inline]
     pub fn fract(self) -> Result<F> {
-        rn(self.0.fract())
+        rf(self.0.fract())
     }
 
     /// Computes the absolute value of `self`.
@@ -444,12 +437,12 @@ where
 
     #[inline]
     pub fn to_degrees(self) -> Result<F> {
-        rn(self.0.to_degrees())
+        rf(self.0.to_degrees())
     }
 
     #[inline]
     pub fn to_radians(self) -> Result<F> {
-        rn(self.0.to_radians())
+        rf(self.0.to_radians())
     }
 
     #[inline]
@@ -470,17 +463,17 @@ where
 {
     #[inline]
     pub fn mul_add(self, a: Self, b: Self) -> Result<F> {
-        rn(self.0.mul_add(a.0, b.0))
+        rf(self.0.mul_add(a.0, b.0))
     }
 
     #[inline]
     pub fn powf(self, n: Self) -> Result<F> {
-        rn(self.0.powf(n.0))
+        rf(self.0.powf(n.0))
     }
 
     #[inline]
     pub fn sqrt(self) -> Result<F> {
-        rn(self.0.sqrt())
+        rf(self.0.sqrt())
     }
 
     #[inline]
@@ -495,22 +488,22 @@ where
 
     #[inline]
     pub fn ln(self) -> Result<F> {
-        rn(self.0.ln())
+        rf(self.0.ln())
     }
 
     #[inline]
     pub fn log(self, base: Self) -> Result<F> {
-        rn(self.0.log(base.0))
+        rf(self.0.log(base.0))
     }
 
     #[inline]
     pub fn log2(self) -> Result<F> {
-        rn(self.0.log2())
+        rf(self.0.log2())
     }
 
     #[inline]
     pub fn log10(self) -> Result<F> {
-        rn(self.0.log10())
+        rf(self.0.log10())
     }
 
     #[inline]
@@ -525,27 +518,27 @@ where
 
     #[inline]
     pub fn sin(self) -> Result<F> {
-        rn(self.0.sin())
+        rf(self.0.sin())
     }
 
     #[inline]
     pub fn cos(self) -> Result<F> {
-        rn(self.0.cos())
+        rf(self.0.cos())
     }
 
     #[inline]
     pub fn tan(self) -> Result<F> {
-        rn(self.0.tan())
+        rf(self.0.tan())
     }
 
     #[inline]
     pub fn asin(self) -> Result<F> {
-        rn(self.0.asin())
+        rf(self.0.asin())
     }
 
     #[inline]
     pub fn acos(self) -> Result<F> {
-        rn(self.0.acos())
+        rf(self.0.acos())
     }
 
     #[inline]
@@ -561,7 +554,7 @@ where
     #[inline]
     pub fn sin_cos(self) -> core::result::Result<(Self, Self), NaN> {
         let (a, b) = self.0.sin_cos();
-        Ok((rn(a)?, rn(b)?))
+        Ok((rf(a)?, rf(b)?))
     }
 
     #[inline]
@@ -571,7 +564,7 @@ where
 
     #[inline]
     pub fn ln_1p(self) -> Result<F> {
-        rn(self.0.ln_1p())
+        rf(self.0.ln_1p())
     }
 
     #[inline]
@@ -611,7 +604,7 @@ where
     /// ```
     #[inline]
     pub fn acosh(self) -> Result<F> {
-        rn(self.0.acosh())
+        rf(self.0.acosh())
     }
 
     /// Inverse hyperbolic tangent function.
@@ -632,7 +625,7 @@ where
     /// ```
     #[inline]
     pub fn atanh(self) -> Result<F> {
-        rn(self.0.atanh())
+        rf(self.0.atanh())
     }
 }
 
@@ -670,7 +663,7 @@ macro_rules! op_impl {
                 type Output = Result<F>;
                 #[inline]
                 fn $method(self, other: Self) -> Result<F> {
-                    rn(self.0 $op other.0)
+                    rf(self.0 $op other.0)
                 }
             }
         )*
