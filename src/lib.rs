@@ -1,5 +1,8 @@
 #![no_std]
 
+#[cfg(test)]
+#[macro_use]
+extern crate std;
 extern crate failure;
 #[macro_use]
 extern crate failure_derive;
@@ -12,6 +15,7 @@ extern crate quickcheck;
 
 // failure_derive may be used with std feature, causing issues
 #[allow(unused_imports)]
+#[cfg(not(test))]
 use core as std;
 
 use core::cmp::Ordering;
@@ -879,5 +883,10 @@ mod tests {
     fn test_ser_de() {
         extern crate serde_test;
         serde_test::assert_tokens(&rf(3.14).unwrap(), &[serde_test::Token::F64(3.14)]);
+    }
+
+    #[test]
+    fn test_display() {
+        assert_eq!(format!("{}", rf(3.14).unwrap()), "3.14");
     }
 }
