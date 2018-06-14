@@ -69,7 +69,7 @@ pub type Rf32 = ResultFloat<f32>;
 /// A floating point number behaving like `f64` that does not allow NaN.
 pub type Rf64 = ResultFloat<f64>;
 
-fn rnu<F>(f: F) -> ResultFloat<F>
+fn rfu<F>(f: F) -> ResultFloat<F>
 where
     F: FloatCore,
 {
@@ -229,7 +229,7 @@ where
     /// ```
     #[inline]
     pub fn floor(self) -> Self {
-        rnu(self.0.floor())
+        rfu(self.0.floor())
     }
 
     /// Returns the smallest integer greater than or equal to a number.
@@ -248,7 +248,7 @@ where
     /// ```
     #[inline]
     pub fn ceil(self) -> Self {
-        rnu(self.0.ceil())
+        rfu(self.0.ceil())
     }
 
     /// Returns the nearest integer to a number. Round half-way cases away from
@@ -268,7 +268,7 @@ where
     /// ```
     #[inline]
     pub fn round(self) -> Self {
-        rnu(self.0.round())
+        rfu(self.0.round())
     }
 
     /// Returns the integer part of a number.
@@ -287,7 +287,7 @@ where
     /// ```
     #[inline]
     pub fn trunc(self) -> Self {
-        rnu(self.0.trunc())
+        rfu(self.0.trunc())
     }
 
     /// Returns the fractional part of a number.
@@ -332,7 +332,7 @@ where
     /// ```
     #[inline]
     pub fn abs(self) -> Self {
-        rnu(self.0.abs())
+        rfu(self.0.abs())
     }
 
     /// Returns a number that represents the sign of `self`.
@@ -354,7 +354,7 @@ where
     /// ```
     #[inline]
     pub fn signum(self) -> Self {
-        rnu(self.0.signum())
+        rfu(self.0.signum())
     }
 
     /// Returns `true` if and only if `self` has a positive sign, including `+0.0`
@@ -411,7 +411,7 @@ where
     /// ```
     #[inline]
     pub fn recip(self) -> Self {
-        rnu(self.0.recip())
+        rfu(self.0.recip())
     }
 
     /// Raises a number to an integer power.
@@ -432,7 +432,7 @@ where
     /// ```
     #[inline]
     pub fn powi(self, n: i32) -> Self {
-        rnu(self.0.powi(n))
+        rfu(self.0.powi(n))
     }
 
     #[inline]
@@ -447,12 +447,12 @@ where
 
     #[inline]
     pub fn max(self, other: Self) -> Self {
-        rnu(self.0.max(other.0))
+        rfu(self.0.max(other.0))
     }
 
     #[inline]
     pub fn min(self, other: Self) -> Self {
-        rnu(self.0.min(other.0))
+        rfu(self.0.min(other.0))
     }
 }
 
@@ -478,12 +478,12 @@ where
 
     #[inline]
     pub fn exp(self) -> Self {
-        rnu(self.0.exp())
+        rfu(self.0.exp())
     }
 
     #[inline]
     pub fn exp2(self) -> Self {
-        rnu(self.0.exp2())
+        rfu(self.0.exp2())
     }
 
     #[inline]
@@ -508,12 +508,12 @@ where
 
     #[inline]
     pub fn cbrt(self) -> Self {
-        rnu(self.0.cbrt())
+        rfu(self.0.cbrt())
     }
 
     #[inline]
     pub fn hypot(self, other: Self) -> Self {
-        rnu(self.0.hypot(other.0))
+        rfu(self.0.hypot(other.0))
     }
 
     #[inline]
@@ -543,12 +543,12 @@ where
 
     #[inline]
     pub fn atan(self) -> Self {
-        rnu(self.0.atan())
+        rfu(self.0.atan())
     }
 
     #[inline]
     pub fn atan2(self, other: Self) -> Self {
-        rnu(self.0.atan2(other.0))
+        rfu(self.0.atan2(other.0))
     }
 
     #[inline]
@@ -559,7 +559,7 @@ where
 
     #[inline]
     pub fn exp_m1(self) -> Self {
-        rnu(self.0.exp_m1())
+        rfu(self.0.exp_m1())
     }
 
     #[inline]
@@ -569,22 +569,22 @@ where
 
     #[inline]
     pub fn sinh(self) -> Self {
-        rnu(self.0.sinh())
+        rfu(self.0.sinh())
     }
 
     #[inline]
     pub fn cosh(self) -> Self {
-        rnu(self.0.cosh())
+        rfu(self.0.cosh())
     }
 
     #[inline]
     pub fn tanh(self) -> Self {
-        rnu(self.0.tanh())
+        rfu(self.0.tanh())
     }
 
     #[inline]
     pub fn asinh(self) -> Self {
-        rnu(self.0.asinh())
+        rfu(self.0.asinh())
     }
 
     /// Inverse hyperbolic cosine function.
@@ -685,7 +685,7 @@ where
     type Output = ResultFloat<F>;
     #[inline]
     fn neg(self) -> ResultFloat<F> {
-        rnu(-self.0)
+        rfu(-self.0)
     }
 }
 
