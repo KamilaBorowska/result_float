@@ -37,3 +37,6 @@ quickcheck = "0.6.2"
 [features]
 default = ["std"]
 std = ["num-traits/std"]
+
+[package.metadata.docs.rs]
+features = ["serde"]
