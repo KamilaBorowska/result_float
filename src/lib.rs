@@ -459,6 +459,21 @@ where
         rf(self.0.to_degrees())
     }
 
+    /// Converts degrees to radians.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64::consts::PI;
+    ///
+    /// let angle = rf(180.0)?;
+    ///
+    /// let abs_difference = (angle.to_radians()? - rf(PI)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn to_radians(self) -> Result<F> {
         rf(self.0.to_radians())
