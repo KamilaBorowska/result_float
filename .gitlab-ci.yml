@@ -40,7 +40,7 @@ pages:
       <!DOCTYPE html>
       <title>Redirection page</title>
       <meta http-equiv=refresh content='0; url=result_float/'>
-      <p> Please check out <a href="result_float/">result_float</a> documentation.
+      <p> Please check out <a href='result_float/'>result_float</a> documentation.
     " > public/index.html
   artifacts:
     paths:
