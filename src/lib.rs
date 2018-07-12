@@ -508,6 +508,25 @@ impl<F> ResultFloat<F>
 where
     F: FloatCore + Float,
 {
+    /// Fused multiply-add. Computes `(self * a) + b` with only one rounding
+    /// error. This produces a more accurate result with better performance than
+    /// a separate multiplication operation followed by an add.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let m = rf(10.0)?;
+    /// let x = rf(4.0)?;
+    /// let b = rf(60.0)?;
+    ///
+    /// // 100.0
+    /// let abs_difference = (m.mul_add(x, b)? - ((m*x)? + b)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn mul_add(self, a: Self, b: Self) -> Result<F> {
         rf(self.0.mul_add(a.0, b.0))
