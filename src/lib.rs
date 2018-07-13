@@ -545,6 +545,19 @@ where
         rf(self.0.mul_add(a.0, b.0))
     }
 
+    /// Raises a number to a floating point power.
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(2.0)?;
+    /// let abs_difference = (x.powf(rf(2.0)?)? - (x*x)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn powf(self, n: Self) -> Result<F> {
         rf(self.0.powf(n.0))
