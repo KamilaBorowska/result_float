@@ -2,11 +2,11 @@ test:1.26:
   script: &test_script
   - rustc --version && cargo --version
   - cargo test --all --all-features --verbose
-  image: liuchong/rustup:1.26.0
+  image: rust:1.26
 
 test:stable:
   script: *test_script
-  image: liuchong/rustup:stable
+  image: rust:latest
 
 test:beta:
   script: *test_script
@@ -14,21 +14,21 @@ test:beta:
 
 test:nightly:
   script: *test_script
-  image: liuchong/rustup:nightly
+  image: rustlang/rust:nightly
 
 clippy:
   script:
   - rustc --version && cargo --version
-  - cargo install clippy
+  - rustup component add clippy-preview
   - cargo clippy --all --all-features --verbose
-  image: liuchong/rustup:nightly
+  image: rustlang/rust:nightly
 
 rustfmt:
   script:
   - rustc --version && cargo --version
   - rustup component add rustfmt-preview
   - cargo fmt -- --check
-  image: liuchong/rustup:nightly
+  image: rustlang/rust:nightly
 
 pages:
   stage: deploy
@@ -45,6 +45,6 @@ pages:
   artifacts:
     paths:
     - public
-  image: liuchong/rustup:nightly
+  image: rustlang/rust:nightly
   only:
   - master
