@@ -478,42 +478,6 @@ where
     pub fn to_radians(self) -> Result<F> {
         rf(self.0.to_radians())
     }
-
-    /// Returns the maximum of the two numbers.
-    ///
-    /// ```
-    /// # fn main() -> Result<(), result_float::NaN> {
-    /// use result_float::rf;
-    ///
-    /// let x = rf(1.0)?;
-    /// let y = rf(2.0)?;
-    ///
-    /// assert_eq!(x.max(y), y);
-    /// # Ok(())
-    /// # }
-    /// ```
-    #[inline]
-    pub fn max(self, other: Self) -> Self {
-        rfu(self.0.max(other.0))
-    }
-
-    /// Returns the minimum of the two numbers.
-    ///
-    /// ```
-    /// # fn main() -> Result<(), result_float::NaN> {
-    /// use result_float::rf;
-    ///
-    /// let x = rf(1.0)?;
-    /// let y = rf(2.0)?;
-    ///
-    /// assert_eq!(x.min(y), x);
-    /// # Ok(())
-    /// # }
-    /// ```
-    #[inline]
-    pub fn min(self, other: Self) -> Self {
-        rfu(self.0.min(other.0))
-    }
 }
 
 #[cfg(feature = "std")]
