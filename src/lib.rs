@@ -527,6 +527,26 @@ where
         rf(self.0.powf(n.0))
     }
 
+    /// Takes the square root of a number.
+    ///
+    /// Returns NaN if `self` is a negative number.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let positive = rf(4.0)?;
+    /// let negative = rf(-4.0)?;
+    ///
+    /// let abs_difference = (positive.sqrt()? - rf(2.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// assert!(negative.sqrt().is_err());
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn sqrt(self) -> Result<F> {
         rf(self.0.sqrt())
