@@ -988,6 +988,27 @@ where
         rf(self.0.ln_1p())
     }
 
+    /// Hyperbolic sine function.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let e = rf(f64::consts::E)?;
+    /// let x = rf(1.0)?;
+    ///
+    /// let f = x.sinh();
+    /// // Solving sinh() at 1 gives `(e^2-1)/(2e)`
+    /// let g = ((e.powi(2) - rf(1.0)?)?/(rf(2.0)?*e)?)?;
+    /// let abs_difference = (f - g)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn sinh(self) -> Self {
         rfu(self.0.sinh())
