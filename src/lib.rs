@@ -738,6 +738,23 @@ where
         rfu(self.0.hypot(other.0))
     }
 
+    /// Computes the sine of a number (in radians).
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let x = (rf(f64::consts::PI)? / rf(2.0)?)?;
+    ///
+    /// let abs_difference = (x.sin()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn sin(self) -> Result<F> {
         rf(self.0.sin())
