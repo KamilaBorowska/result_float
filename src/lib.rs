@@ -838,6 +838,39 @@ where
         rfu(self.0.atan())
     }
 
+    /// Computes the four quadrant arctangent of `self` (`y`) and `other` (`x`) in radians.
+    ///
+    /// * `x = 0`, `y = 0`: `0`
+    /// * `x >= 0`: `arctan(y/x)` -> `[-pi/2, pi/2]`
+    /// * `y >= 0`: `arctan(y/x) + pi` -> `(pi/2, pi]`
+    /// * `y < 0`: `arctan(y/x) - pi` -> `(-pi, -pi/2)`
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let pi = rf(f64::consts::PI)?;
+    /// // Positive angles measured counter-clockwise
+    /// // from positive x axis
+    /// // -pi/4 radians (45 deg clockwise)
+    /// let x1 = rf(3.0)?;
+    /// let y1 = -rf(3.0)?;
+    ///
+    /// // 3pi/4 radians (135 deg counter-clockwise)
+    /// let x2 = -rf(3.0)?;
+    /// let y2 = rf(3.0)?;
+    ///
+    /// let abs_difference_1 = (y1.atan2(x1) - (-pi/rf(4.0)?)?)?.abs();
+    /// let abs_difference_2 = (y2.atan2(x2) - ((rf(3.0)?*pi)?/rf(4.0)?)?)?.abs();
+    ///
+    /// assert!(abs_difference_1 < rf(1e-10)?);
+    /// assert!(abs_difference_2 < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn atan2(self, other: Self) -> Self {
         rfu(self.0.atan2(other.0))
