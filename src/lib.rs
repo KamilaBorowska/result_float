@@ -21,6 +21,7 @@
 //! # }
 //! ```
 #![no_std]
+#![deny(missing_docs)]
 
 #[cfg(test)]
 #[macro_use]
