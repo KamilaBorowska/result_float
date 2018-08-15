@@ -828,6 +828,26 @@ where
         rf(self.0.asin())
     }
 
+    /// Computes the arccosine of a number. Return value is in radians in
+    /// the range [0, pi] or NaN if the number is outside the range
+    /// [-1, 1].
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let f = (rf(f64::consts::PI)? / rf(4.0)?)?;
+    ///
+    /// // acos(cos(pi/4))
+    /// let abs_difference = (f.cos()?.acos()? - (rf(f64::consts::PI)? / rf(4.0)?)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn acos(self) -> Result<F> {
         rf(self.0.acos())
