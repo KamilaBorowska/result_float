@@ -648,6 +648,23 @@ where
         rf(self.0.log(base.0))
     }
 
+    /// Returns the base 2 logarithm of the number.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let two = rf(2.0)?;
+    ///
+    /// // log2(2) - 1 == 0
+    /// let abs_difference = (two.log2()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn log2(self) -> Result<F> {
         rf(self.0.log2())
