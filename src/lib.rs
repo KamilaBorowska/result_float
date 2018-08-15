@@ -552,6 +552,25 @@ where
         rf(self.0.sqrt())
     }
 
+    /// Returns `e^(self)`, (the exponential function).
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let one = rf(1.0)?;
+    /// // e^1
+    /// let e = one.exp();
+    ///
+    /// // ln(e) - 1 == 0
+    /// let abs_difference = (e.ln()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn exp(self) -> Self {
         rfu(self.0.exp())
