@@ -1093,11 +1093,50 @@ where
 }
 
 impl ResultFloat<f32> {
+    /// Raw transmutation to `u32`.
+    ///
+    /// This is currently identical to `transmute::<f32, u32>(self.raw())` on all platforms.
+    ///
+    /// Note that this function is distinct from `as` casting, which attempts to
+    /// preserve the *numeric* value, and not the bitwise value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// assert!(rf(1f32)?.to_bits() != 1f32 as u32); // to_bits() is not casting!
+    /// assert_eq!(rf(12.5f32)?.to_bits(), 0x41480000);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn to_bits(self) -> u32 {
         self.0.to_bits()
     }
 
+    /// Raw transmutation from `u32`.
+    ///
+    /// This is currently identical to `rf(transmute::<u32, f32>(v))` on all platforms.
+    /// It turns out this is incredibly portable, for two reasons:
+    ///
+    /// * Floats and Ints have the same endianness on all supported platforms.
+    /// * IEEE-754 very precisely specifies the bit layout of floats.
+    ///
+    /// Note that this function is distinct from `as` casting, which attempts to
+    /// preserve the *numeric* value, and not the bitwise value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::{rf, Rf32};
+    /// let v = Rf32::from_bits(0x41480000)?;
+    /// let difference = (v - rf(12.5)?)?.abs();
+    /// assert!(difference <= rf(1e-5)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn from_bits(v: u32) -> Result<f32> {
         rf(f32::from_bits(v))
@@ -1105,11 +1144,50 @@ impl ResultFloat<f32> {
 }
 
 impl ResultFloat<f64> {
+    /// Raw transmutation to `u64`.
+    ///
+    /// This is currently identical to `transmute::<f64, u64>(self.raw())` on all platforms.
+    ///
+    /// Note that this function is distinct from `as` casting, which attempts to
+    /// preserve the *numeric* value, and not the bitwise value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// assert!(rf(1f64)?.to_bits() != 1f64 as u64); // to_bits() is not casting!
+    /// assert_eq!(rf(12.5f64)?.to_bits(), 0x4029000000000000);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn to_bits(self) -> u64 {
         self.0.to_bits()
     }
 
+    /// Raw transmutation from `u64`.
+    ///
+    /// This is currently identical to `rf(transmute::<u64, f64>(v))` on all platforms.
+    /// It turns out this is incredibly portable, for two reasons:
+    ///
+    /// * Floats and Ints have the same endianness on all supported platforms.
+    /// * IEEE-754 very precisely specifies the bit layout of floats.
+    ///
+    /// Note that this function is distinct from `as` casting, which attempts to
+    /// preserve the *numeric* value, and not the bitwise value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::{rf, Rf64};
+    /// let v = Rf64::from_bits(0x4029000000000000)?;
+    /// let difference = (v - rf(12.5)?)?.abs();
+    /// assert!(difference <= rf(1e-5)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn from_bits(v: u64) -> Result<f64> {
         rf(f64::from_bits(v))
