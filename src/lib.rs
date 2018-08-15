@@ -833,6 +833,24 @@ where
         rf(self.0.acos())
     }
 
+    /// Computes the arctangent of a number. Return value is in radians in the
+    /// range [-pi/2, pi/2];
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(1.0)?;
+    ///
+    /// // atan(tan(1))
+    /// let abs_difference = (f.tan()?.atan() - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn atan(self) -> Self {
         rfu(self.0.atan())
