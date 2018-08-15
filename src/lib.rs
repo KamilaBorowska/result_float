@@ -632,6 +632,23 @@ where
         rf(self.0.log2())
     }
 
+    /// Returns the base 10 logarithm of the number.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let ten = rf(10.0)?;
+    ///
+    /// // log10(10) - 1 == 0
+    /// let abs_difference = (ten.log10()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn log10(self) -> Result<F> {
         rf(self.0.log10())
