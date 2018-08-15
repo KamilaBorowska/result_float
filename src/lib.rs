@@ -675,6 +675,23 @@ where
         rf(self.0.log10())
     }
 
+    /// Takes the cubic root of a number.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(8.0)?;
+    ///
+    /// // x^(1/3) - 2 == 0
+    /// let abs_difference = (x.cbrt() - rf(2.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn cbrt(self) -> Self {
         rfu(self.0.cbrt())
