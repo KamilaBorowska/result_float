@@ -925,6 +925,25 @@ where
         rfu(self.0.exp_m1())
     }
 
+    /// Returns `ln(1+n)` (natural logarithm) more accurately than if
+    /// the operations were performed separately.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let x = (rf(f64::consts::E)? - rf(1.0)?)?;
+    ///
+    /// // ln(1 + (e - 1)) == ln(e) == 1
+    /// let abs_difference = (x.ln_1p()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn ln_1p(self) -> Result<F> {
         rf(self.0.ln_1p())
