@@ -622,6 +622,27 @@ where
         rf(self.0.ln())
     }
 
+    /// Returns the logarithm of the number with respect to an arbitrary base.
+    ///
+    /// The result may not be correctly rounded owing to implementation details;
+    /// `self.log2()` can produce more accurate results for base 2, and
+    /// `self.log10()` can produce more accurate results for base 10.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let five = rf(5.0)?;
+    ///
+    /// // log5(5) - 1 == 0
+    /// let abs_difference = (five.log(rf(5.0)?)? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn log(self, base: Self) -> Result<F> {
         rf(self.0.log(base.0))
