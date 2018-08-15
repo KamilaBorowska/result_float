@@ -1019,6 +1019,27 @@ where
         rfu(self.0.cosh())
     }
 
+    /// Hyperbolic tangent function.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let e = rf(f64::consts::E)?;
+    /// let x = rf(1.0)?;
+    ///
+    /// let f = x.tanh();
+    /// // Solving tanh() at 1 gives `(1 - e^(-2))/(1 + e^(-2))`
+    /// let g = ((rf(1.0)? - e.powi(-2))?/(rf(1.0)? + e.powi(-2))?)?;
+    /// let abs_difference = (f - g)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1.0e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn tanh(self) -> Self {
         rfu(self.0.tanh())
