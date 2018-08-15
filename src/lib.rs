@@ -887,6 +887,24 @@ where
         Ok((rf(a)?, rf(b)?))
     }
 
+    /// Returns `e^(self) - 1` in a way that is accurate even if the
+    /// number is close to zero.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(7.0)?;
+    ///
+    /// // e^(ln(7)) - 1
+    /// let abs_difference = (x.ln()?.exp_m1() - rf(6.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn exp_m1(self) -> Self {
         rfu(self.0.exp_m1())
