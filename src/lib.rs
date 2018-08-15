@@ -770,6 +770,26 @@ where
         rf(self.0.tan())
     }
 
+    /// Computes the arcsine of a number. Return value is in radians in
+    /// the range [-pi/2, pi/2] or NaN if the number is outside the range
+    /// [-1, 1].
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let f = (rf(f64::consts::PI)? / rf(2.0)?)?;
+    ///
+    /// // asin(sin(pi/2))
+    /// let abs_difference = (f.sin()?.asin()? - (rf(f64::consts::PI)? / rf(2.0)?)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn asin(self) -> Result<F> {
         rf(self.0.asin())
