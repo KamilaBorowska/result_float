@@ -557,6 +557,23 @@ where
         rfu(self.0.exp())
     }
 
+    /// Returns `2^(self)`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let f = rf(2.0)?;
+    ///
+    /// // 2^2 - 4 == 0
+    /// let abs_difference = (f.exp2() - rf(4.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn exp2(self) -> Self {
         rfu(self.0.exp2())
