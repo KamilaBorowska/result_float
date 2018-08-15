@@ -914,6 +914,27 @@ where
         rfu(self.0.atan2(other.0))
     }
 
+    /// Simultaneously computes the sine and cosine of the number, `x`. Returns
+    /// `(sin(x), cos(x))`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let x = (rf(f64::consts::PI)?/rf(4.0)?)?;
+    /// let f = x.sin_cos()?;
+    ///
+    /// let abs_difference_0 = (f.0 - x.sin()?)?.abs();
+    /// let abs_difference_1 = (f.1 - x.cos()?)?.abs();
+    ///
+    /// assert!(abs_difference_0 < rf(1e-10)?);
+    /// assert!(abs_difference_1 < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn sin_cos(self) -> core::result::Result<(Self, Self), NaN> {
         let (a, b) = self.0.sin_cos();
