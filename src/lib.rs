@@ -697,6 +697,25 @@ where
         rfu(self.0.cbrt())
     }
 
+    /// Calculates the length of the hypotenuse of a right-angle triangle given
+    /// legs of length `x` and `y`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    ///
+    /// let x = rf(2.0)?;
+    /// let y = rf(3.0)?;
+    ///
+    /// // sqrt(x^2 + y^2)
+    /// let abs_difference = (x.hypot(y) - (x.powi(2) + y.powi(2))?.sqrt()?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn hypot(self, other: Self) -> Self {
         rfu(self.0.hypot(other.0))
