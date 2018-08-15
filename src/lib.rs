@@ -1,3 +1,25 @@
+//! This crate contains floating point types that error if they are set to NaN.
+//!
+//! # Examples
+//!
+//! ```
+//! # fn main() -> Result<(), result_float::NaN> {
+//! use result_float::{rf, Rf64, Result};
+//!
+//! fn geometric_mean(a: Rf64, b: Rf64) -> Result<f64> {
+//!     (a * b)?.sqrt()
+//! }
+//!
+//! fn mean(a: Rf64, b: Rf64) -> Result<f64> {
+//!     (a + b)? * rf(0.5)?
+//! }
+//!
+//! println!("geometric_mean(10.0, 20.0) = {}", geometric_mean(rf(10.0)?, rf(20.0)?)?);
+//! //prints 14.142...
+//! assert!(mean(rf(10.0)?, rf(20.0)?)? == rf(15.0)?);
+//! # Ok(())
+//! # }
+//! ```
 #![no_std]
 
 #[cfg(test)]
