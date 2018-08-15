@@ -760,6 +760,23 @@ where
         rf(self.0.sin())
     }
 
+    /// Computes the cosine of a number (in radians).
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # fn main() -> Result<(), result_float::NaN> {
+    /// use result_float::rf;
+    /// use std::f64;
+    ///
+    /// let x = (rf(2.0)? * rf(f64::consts::PI)?)?;
+    ///
+    /// let abs_difference = (x.cos()? - rf(1.0)?)?.abs();
+    ///
+    /// assert!(abs_difference < rf(1e-10)?);
+    /// # Ok(())
+    /// # }
+    /// ```
     #[inline]
     pub fn cos(self) -> Result<F> {
         rf(self.0.cos())
