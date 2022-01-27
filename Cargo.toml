@@ -1,6 +1,6 @@
 [package]
 name = "result_float"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Konrad Borowski <konrad@borowski.pw>"]
 repository = "https://gitlab.com/KonradBorowski/result_float"
 license = "MIT OR Apache-2.0"
