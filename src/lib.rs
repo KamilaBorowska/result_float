@@ -1393,9 +1393,9 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::{rf, Rf64};
     use core::hash::{Hash, Hasher};
     use quickcheck::TestResult;
-    use {rf, Rf64};
 
     struct TestHasher {
         value: u64,

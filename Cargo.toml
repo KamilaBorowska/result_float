@@ -8,6 +8,7 @@ description = "Floating point type that cannot store NaN"
 documentation = "https://docs.rs/result_float"
 keywords = ["no_std"]
 categories = ["no-std"]
+edition = "2018"
 
 [badges]
 gitlab = { repository = "KonradBorowski/result_float" }
