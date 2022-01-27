@@ -26,10 +26,10 @@
 #[cfg(test)]
 #[macro_use]
 extern crate std;
-extern crate failure;
+use failure;
 #[macro_use]
 extern crate failure_derive;
-extern crate num_traits;
+
 #[cfg(feature = "serde")]
 extern crate serde;
 #[cfg(test)]
@@ -1308,7 +1308,7 @@ macro_rules! format_impl {
                 F: $imp,
             {
                 #[inline]
-                fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+                fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
                     self.0.fmt(f)
                 }
             }
