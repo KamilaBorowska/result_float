@@ -1455,11 +1455,6 @@ mod tests {
             TestResult::from_bool(rf!(x).floor().raw() == x.floor())
         }
 
-        fn acosh(x: f64) -> TestResult {
-            let x = rf!(x).abs();
-            TestResult::from_bool((x.cosh().acosh().unwrap() - x).unwrap() < rf(1e-10).unwrap())
-        }
-
         fn hash_f32(x: f32) -> TestResult {
             let x = rf!(x);
             if x == rf!(0.0f32) && x.is_sign_negative() {

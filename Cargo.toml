@@ -25,7 +25,7 @@ optional = true
 
 [dev-dependencies]
 serde_test = "1.0.66"
-quickcheck = "0.6.2"
+quickcheck = "1.0.3"
 
 [features]
 default = ["std"]
