@@ -72,10 +72,19 @@ pub struct NaN;
 ///
 /// [Rf32]: ./type.Rf32.html
 /// [Rf64]: ./type.Rf64.html
-#[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct ResultFloat<F>(F);
 
 impl<F> Eq for ResultFloat<F> where F: PartialEq {}
+
+impl<F> PartialOrd for ResultFloat<F>
+where
+    F: PartialOrd,
+{
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        self.0.partial_cmp(&other.0)
+    }
+}
 
 impl<F> Ord for ResultFloat<F>
 where
