@@ -14,16 +14,8 @@ edition = "2018"
 gitlab = { repository = "KonradBorowski/result_float" }
 maintenance = { status = "actively-developed" }
 
-[dependencies.failure_derive]
-version = "0.1.1"
-default-features = false
-
 [dependencies.num-traits]
 version = "0.2.4"
-default-features = false
-
-[dependencies.failure]
-version = "0.1.1"
 default-features = false
 
 [dependencies.serde]

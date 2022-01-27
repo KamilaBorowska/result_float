@@ -23,23 +23,14 @@
 #![no_std]
 #![deny(missing_docs)]
 
-#[cfg(test)]
+#[cfg(any(test, feature = "std"))]
 #[macro_use]
 extern crate std;
-use failure;
-#[macro_use]
-extern crate failure_derive;
-
 #[cfg(feature = "serde")]
 extern crate serde;
 #[cfg(test)]
 #[macro_use]
 extern crate quickcheck;
-
-// failure_derive may be used with std feature, causing issues
-#[allow(unused_imports)]
-#[cfg(not(test))]
-use core as std;
 
 use core::cmp::Ordering;
 use core::fmt::{self, Display, Formatter, LowerExp, UpperExp};
@@ -61,9 +52,17 @@ use serde::ser::{Serialize, Serializer};
 /// use result_float::{rf, NaN};
 /// assert_eq!(rf(NAN), Err(NaN));
 /// ```
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Fail)]
-#[fail(display = "NaN")]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct NaN;
+
+impl Display for NaN {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "NaN")
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for NaN {}
 
 /// A floating point number that cannot store NaN.
 ///
