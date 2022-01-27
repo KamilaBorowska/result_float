@@ -12,7 +12,7 @@ edition = "2018"
 
 [badges]
 gitlab = { repository = "KonradBorowski/result_float" }
-maintenance = { status = "actively-developed" }
+maintenance = { status = "passively-maintained" }
 
 [dependencies.num-traits]
 version = "0.2.4"
